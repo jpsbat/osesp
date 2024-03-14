@@ -62,9 +62,6 @@ export default {
       default: "",
     },
   },
-  mounted() {
-    this.listar();
-  },
   methods: {
     cadastrarPermissao(e) {
       e.preventDefault();
@@ -80,62 +77,6 @@ export default {
           this.$swal("Sucesso!", `${cargo} cadastrado no sistema.`, "success");
         })
         .catch((error) => console.log(error));
-    },
-    listar() {
-      axios
-        .get("http://localhost:3000/routes/permissaoacesso/listar")
-        .then((response) => {
-          this.permissaoacesso = response.data.data;
-        })
-        .catch((error) => console.log(error));
-    },
-    atualizarCliente(id) {
-      axios
-        .get(`http://localhost:3000/routes/permissaoacesso/${id}`)
-        .then((response) => {
-          var novo_cargo = window.prompt(
-            `Cargo: ${cargo}`,
-            response.data.data.cargo
-          );
-          var novo_administrador = window.prompt(
-            `Administrador: ${administrador}`,
-            response.data.data.administrador
-          );
-
-          if (novo_cargo && novo_administrador !== null) {
-            axios
-              .patch(
-                `http://localhost:3000/routes/permissaoacesso/alterar/${id}`,
-                {
-                  cargo: novo_cargo,
-                  administrador: novo_administrador,
-                }
-              )
-              .then((response) => {
-                console.log(response);
-                this.listar();
-              })
-              .catch((error) => console.log(error));
-          }
-        })
-        .catch((error) => console.log(error));
-    },
-    confirmarExclusaoPermissaoAcesso(id, cargo, administrador) {
-      this.idPermissaoAcesso = id;
-      this.novoCargo = cargo;
-      this.novoAdministrador = administrador;
-      this.showModal = true;
-    },
-    excluirPermissaoAcesso(id) {
-      axios
-        .delete(`http://localhost:3000/routes/permissaoacesso/excluir/${id}`)
-        .then((response) => {
-          console.log(response);
-          this.listar();
-        })
-        .catch((error) => console.log(error));
-
-      this.showModal = false;
     },
   },
 };

@@ -60,6 +60,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "usuario",
   props: {
@@ -69,7 +71,33 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      usuarios: [],
+      nome: "",
+      email: "",
+      senha: "",
+      ativo: "",
+      permissaoacesso: [],
+      permissao_disponivel: [],
+    };
+  },
+  cadastrarUsuario(e) {
+    e.preventDefault();
+
+    axios
+      .post("http://localhost:3000/routes/usuarios/cadastrar", {
+        nome: this.nome,
+        email: this.email,
+        senha: this.senha,
+        id_permissaoacesso: this.permissaoacesso,
+        ativo: this.ativo,
+      })
+      .then((response) => {
+        console.log(response);
+        this.listar();
+        this.$swal("Sucesso!", `${nome} cadastrado no sistema.`, "success");
+      })
+      .catch((error) => console.log(error));
   },
 };
 </script>
