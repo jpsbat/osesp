@@ -14,13 +14,13 @@
                 <div class="md-layout-item md-small-size-100 md-size-50">
                   <md-field>
                     <label>Nome</label>
-                    <md-input v-model="username" type="text"></md-input>
+                    <md-input v-model="nome" type="text"></md-input>
                   </md-field>
                 </div>
                 <div class="md-layout-item md-small-size-100 md-size-33">
                   <md-field>
                     <label>Email</label>
-                    <md-input v-model="emailadress" type="email"></md-input>
+                    <md-input v-model="email" type="email"></md-input>
                   </md-field>
                 </div>
                 <div class="md-layout-item md-small-size-100 md-size-50">
@@ -28,7 +28,11 @@
                     <label class="d-flex justify-content-between"
                       >Digite sua senha</label
                     >
-                    <md-input id="password" type="password"></md-input>
+                    <md-input
+                      v-model="senha"
+                      id="password"
+                      type="password"
+                    ></md-input>
                   </md-field>
                 </div>
                 <div class="md-layout-item md-small-size-100 md-size-40 mt-3">
@@ -47,7 +51,11 @@
                   </select>
                 </div>
                 <div class="md-layout-item md-size-100 text-right">
-                  <md-button class="md-raised md-warning">Cadastrar</md-button>
+                  <md-button
+                    class="md-raised md-warning"
+                    @click="cadastrarUsuario()"
+                    >Cadastrar</md-button
+                  >
                 </div>
               </div>
             </md-card-content>
