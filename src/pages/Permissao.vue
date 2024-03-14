@@ -11,25 +11,24 @@
 
             <md-card-content>
               <div class="md-layout">
-                <div class="md-layout-item md-size-33 mt-2">
+                <div class="md-layout-item md-size-50 mt-2">
                   <md-field>
-                    <label>Cargo</label>
-                    <md-input v-model="cargo" type="text"></md-input>
+                    <label>Descrição do cargo</label>
+                    <md-input v-model="descricao" type="text"></md-input>
                   </md-field>
                 </div>
-                <div class="md-layout-item md-size-33 mt-4">
-                  <select id="select1" class="form-select">
-                    <option disabled selected>Administrador</option>
-                    <option>Sim</option>
-                    <option>Não</option>
-                  </select>
+                <div class="md-layout-item md-size-20 mt-2">
+                  <md-field>
+                    <label>Administrador?</label>
+                    <md-input v-model="administrador" type="text"></md-input>
+                  </md-field>
                 </div>
                 <div class="md-layout-item md-size-100 text-right">
                   <md-button
                     class="md-raised md-warning"
                     type="submit"
                     value="cadastrar"
-                    @click="cadastrarCliente($event)"
+                    @click="cadastrarPermissao($event)"
                     >Cadastrar</md-button
                   >
                 </div>
@@ -48,33 +47,34 @@ import axios from "axios";
 
 export default {
   name: "permissao",
-  data() {
-    return {
-      cargo: "",
-      administrador: "",
-      permissaoacesso: [],
-      showModal: false,
-    };
-  },
   props: {
     dataBackgroundColor: {
       type: String,
       default: "",
     },
   },
+  data() {
+    return {
+      descricao: "",
+      administrador: null,
+      permissaoacesso: [],
+    };
+  },
   methods: {
     cadastrarPermissao(e) {
       e.preventDefault();
 
+      const administradorNum = /^\d+$/.test(this.administrador)
+        ? parseInt(this.administrador)
+        : null;
+
       axios
         .post("http://localhost:3000/routes/permissaoacesso/cadastrar", {
-          cargo: this.cargo,
-          administrador: this.administrador,
+          descricao: this.descricao,
+          administrador: administradorNum,
         })
         .then((response) => {
           console.log(response);
-          this.listar();
-          this.$swal("Sucesso!", `${cargo} cadastrado no sistema.`, "success");
         })
         .catch((error) => console.log(error));
     },

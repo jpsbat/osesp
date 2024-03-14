@@ -15,24 +15,27 @@
             <md-card-content>
               <div class="md-layout">
                 <div class="md-layout-item md-size-33 mt-3">
-                  <select id="select1" class="form-select">
+                  <select id="" v-model="usuario" class="form-select">
                     <option disabled selected>Usuário</option>
-                    <option>Bach</option>
-                    <option>Beethoven</option>
-                    <option>Mozart</option>
-                    <option>Chopin</option>
-                    <option>Vivaldi</option>
+                    <option
+                      v-for="usuario in usuarios_disponiveis"
+                      :key="usuario.ID"
+                      :value="usuario.ID"
+                    >
+                      {{ usuario.nome }}
+                    </option>
                   </select>
                 </div>
                 <div class="md-layout-item md-size-33 mt-3">
-                  <select id="select1" class="form-select">
-                    <option disabled selected>Menus</option>
-                    <option>Cadastros</option>
-                    <option>Produtos</option>
-                    <option>Classificação de eventos</option>
-                    <option>Metas</option>
-                    <option>Compositores</option>
-                    <option>Obras</option>
+                  <select id="" v-model="menu" class="form-select">
+                    <option disabled selected>Menu</option>
+                    <option
+                      v-for="menu in menus_disponiveis"
+                      :key="menu.id"
+                      :value="menu.id"
+                    >
+                      {{ menu.descricao }}
+                    </option>
                   </select>
                 </div>
                 <div class="md-layout-item md-size-100 text-right">
@@ -58,7 +61,39 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      usuarios_disponiveis: [],
+      menus_disponiveis: [],
+    };
+  },
+  mounted() {
+    this.preencherSelect();
+  },
+  methods: {
+    cadastrarRelacionamento(e) {
+      e.preventDefault();
+
+      axios
+        .post("http://localhost:3000/routes/permissao/cadastrar", {
+          nome: this.nome,
+          email: this.email,
+        })
+        .then((response) => {
+          console.log(response);
+          this.listar();
+        })
+        .catch((error) => console.log(error));
+    },
+    preencherSelect() {
+      axios
+        .get("http://localhost:3000/routes/permissao/listar")
+        .then((response) => {
+          this.usuarios_disponiveis = response.data.data;
+          this.menus_disponiveis = response.data.data;
+          this.listar();
+        })
+        .catch((error) => console.log(error));
+    },
   },
 };
 </script>

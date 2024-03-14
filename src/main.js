@@ -18,12 +18,15 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import App from "./App";
 import { BootstrapVue } from "bootstrap-vue";
+import VueSweetalert2 from "vue-sweetalert2";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import "bootstrap-select/dist/css/bootstrap-select.css";
+import "sweetalert2/dist/sweetalert2.all"
 
 Vue.use(BootstrapVue);
+Vue.use(VueSweetalert2);
 
 import Vuelidate from "vuelidate";
 Vue.use(Vuelidate);

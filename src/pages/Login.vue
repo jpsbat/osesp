@@ -8,28 +8,33 @@
         <h2 class="text-center mb-5 title-login">Faça o login</h2>
 
         <b-form>
-          <b-form-group label-for="email">
-            <md-field>
-              <label class="d-flex justify-content-between"
-                >Digite seu email</label
-              >
-              <md-input
-                class="mb-1"
-                id="email"
-                type="email"
-                autocomplete="off"
-              ></md-input>
-            </md-field>
+          <b-form-group label="E-mail" label-for="email">
+            <b-form-input
+              id="email"
+              type="email"
+              placeholder="joaosilva@email.com"
+              autocomplete="off"
+              v-model="email"
+            ></b-form-input>
           </b-form-group>
 
+          <br />
+
           <b-form-group label-for="password">
-            <md-field>
-              <label class="d-flex justify-content-between"
-                >Digite sua senha</label
-              >
-              <md-input class="mb-1" id="password" type="password"></md-input>
-            </md-field>
+            <label class="d-flex justify-content-between">
+              Senha
+              <small><a href="#">Esqueceu sua senha?</a></small>
+            </label>
+
+            <b-form-input
+              id="password"
+              type="password"
+              placeholder="Digite sua senha"
+              v-model="password"
+            ></b-form-input>
           </b-form-group>
+
+          <br />
 
           <b-button
             class="mt-8 text-white"
@@ -39,12 +44,6 @@
             :to="{ path: '/permissao' }"
           >
             <i class="fas fa-sign-in-alt"></i> Entrar
-          </b-button>
-
-          <hr />
-
-          <b-button type="button" variant="outline-secondary" block>
-            <i class="fas fa-user-plus"></i> Não tenho conta
           </b-button>
         </b-form>
       </div>

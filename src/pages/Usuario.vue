@@ -35,25 +35,27 @@
                     ></md-input>
                   </md-field>
                 </div>
-                <div class="md-layout-item md-small-size-100 md-size-40 mt-3">
-                  <select id="select1" class="form-select">
-                    <option disabled selected>Permissão de acesso</option>
-                    <option>Administrador</option>
-                    <option>Operação</option>
-                    <option>TI</option>
-                  </select>
+                <div class="md-layout-item md-small-size-100 md-size-33">
+                  <md-field>
+                    <label>Permissão de acesso</label>
+                    <md-input
+                      v-model="idPermissaoAcesso"
+                      type="text"
+                    ></md-input>
+                  </md-field>
                 </div>
-                <div class="md-layout-item md-size-33 mt-3">
-                  <select id="select1" class="form-select">
-                    <option disabled selected>Ativo</option>
-                    <option>Sim</option>
-                    <option>Não</option>
-                  </select>
+                <div class="md-layout-item md-small-size-100 md-size-33">
+                  <md-field>
+                    <label>Ativo?</label>
+                    <md-input v-model="ativo" type="text"></md-input>
+                  </md-field>
                 </div>
                 <div class="md-layout-item md-size-100 text-right">
                   <md-button
                     class="md-raised md-warning"
-                    @click="cadastrarUsuario()"
+                    type="submit"
+                    value="cadastrar"
+                    @click="cadastrarUsuario($event)"
                     >Cadastrar</md-button
                   >
                 </div>
@@ -80,30 +82,33 @@ export default {
   },
   data() {
     return {
-      usuarios: [],
       nome: "",
       email: "",
       senha: "",
-      ativo: "",
-      permissaoacesso: [],
-      permissao_disponivel: [],
+      ativo: null,
+      idPermissaoAcesso: null,
+      usuarios: [],
     };
   },
   cadastrarUsuario(e) {
     e.preventDefault();
+
+    const ativoNum = /^\d+$/.test(this.ativo) ? parseInt(this.ativo) : null;
+
+    const idPermissaoAcessoNum = /^\d+$/.test(this.idPermissaoAcesso)
+      ? parseInt(this.idPermissaoAcesso)
+      : null;
 
     axios
       .post("http://localhost:3000/routes/usuarios/cadastrar", {
         nome: this.nome,
         email: this.email,
         senha: this.senha,
-        id_permissaoacesso: this.permissaoacesso,
-        ativo: this.ativo,
+        idPermissaoAcesso: idPermissaoAcessoNum,
+        ativo: ativoNum,
       })
       .then((response) => {
         console.log(response);
-        this.listar();
-        this.$swal("Sucesso!", `${nome} cadastrado no sistema.`, "success");
       })
       .catch((error) => console.log(error));
   },
