@@ -1,11 +1,12 @@
 <template>
   <div>
-    <md-table v-model="users" :table-header-color="tableHeaderColor">
+    <md-table v-model="usuarios" :table-header-color="tableHeaderColor">
       <md-table-row slot="md-table-row" slot-scope="{ item }">
-        <md-table-cell md-label="Name">{{ item.name }}</md-table-cell>
-        <md-table-cell md-label="Country">{{ item.country }}</md-table-cell>
-        <md-table-cell md-label="City">{{ item.city }}</md-table-cell>
-        <md-table-cell md-label="Salary">{{ item.salary }}</md-table-cell>
+        <md-table-cell md-label="Descrição">{{ item.name }}</md-table-cell>
+        <md-table-cell md-label="Link">{{ item.name }}</md-table-cell>
+        <md-table-cell md-label="Id Pai">{{ item.name }}</md-table-cell>
+        <md-table-cell md-label="Orgem">{{ item.name }}</md-table-cell>
+        <md-table-cell md-label="Ativo">{{ item.country }}</md-table-cell>
       </md-table-row>
     </md-table>
   </div>
@@ -13,7 +14,7 @@
 
 <script>
 export default {
-  name: "simple-table",
+  name: "tbmenu",
   props: {
     tableHeaderColor: {
       type: String,
@@ -23,7 +24,7 @@ export default {
   data() {
     return {
       selected: [],
-      users: [
+      usuarios: [
         {
           name: "Dakota Rice",
           salary: "$36,738",

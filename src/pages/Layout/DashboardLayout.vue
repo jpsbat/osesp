@@ -21,6 +21,10 @@
         <md-icon>library_books</md-icon>
         <p>Relações do usuário</p>
       </sidebar-link>
+      <sidebar-link to="/gerenciamento">
+        <md-icon>list</md-icon>
+        <p>Gerenciamento</p>
+      </sidebar-link>
       <sidebar-link to="/" class="active-pro">
         <md-icon>login</md-icon>
         <p>Login</p>

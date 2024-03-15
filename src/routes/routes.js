@@ -4,6 +4,7 @@ import Usuario from "@/pages/Usuario.vue";
 import Menu from "@/pages/Menu.vue";
 import Relacionamento from "@/pages/Relacionamento.vue";
 import Login from "../pages/Login.vue";
+import Gerenciamento from "../pages/Gerenciamento.vue";
 
 const routes = [
   {
@@ -34,6 +35,11 @@ const routes = [
         path: "/relacionamento",
         name: "Relações do usuário",
         component: Relacionamento,
+      },
+      {
+        path: "/gerenciamento",
+        name: "Gerenciamento",
+        component: Gerenciamento,
       },
       {
         path: "/",

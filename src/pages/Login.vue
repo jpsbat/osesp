@@ -7,6 +7,9 @@
       <div class="col-8">
         <h2 class="text-center mb-5 title-login">Faça o login</h2>
 
+        <!-- Parágrafos para exibir mensagens de erro -->
+        <p v-if="error" class="text-danger">{{ error }}</p>
+
         <b-form>
           <b-form-group label="E-mail" label-for="email">
             <b-form-input
@@ -14,7 +17,7 @@
               type="email"
               placeholder="joaosilva@email.com"
               autocomplete="off"
-              v-model="email"
+              v-model="login"
             ></b-form-input>
           </b-form-group>
 
@@ -30,7 +33,7 @@
               id="password"
               type="password"
               placeholder="Digite sua senha"
-              v-model="password"
+              v-model="senha"
             ></b-form-input>
           </b-form-group>
 
@@ -38,10 +41,10 @@
 
           <b-button
             class="mt-8 text-white"
-            type="button"
+            type="submit"
             variant="primary"
             block
-            :to="{ path: '/permissao' }"
+            @click="submitForm"
           >
             <i class="fas fa-sign-in-alt"></i> Entrar
           </b-button>
@@ -54,7 +57,41 @@
   </b-row>
 </template>
 
-<script></script>
+<script>
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      login: "",
+      senha: "",
+      error: "", // Adicionando variável para armazenar mensagens de erro
+    };
+  },
+  methods: {
+    async submitForm() {
+      if (!this.login || !this.senha) {
+        this.error = "Preencha os campos obrigatórios."; // Definindo mensagem de erro
+        return;
+      }
+      const loginData = {
+        login: this.login,
+        senha: this.senha,
+      };
+      axios
+        .post("http://localhost:3000/routes/usuarios/login", loginData)
+        .then((response) => {
+          this.$router.push("/permissao");
+          console.log(response.data);
+        })
+        .catch((error) => {
+          this.error = "Login ou senha incorretos"; // Definindo mensagem de erro
+          console.error("Erro ao fazer login", error);
+        });
+    },
+  },
+};
+</script>
 
 <style>
 *,
@@ -82,5 +119,9 @@
 .img-login {
   width: 600px;
   height: 600px;
+}
+
+.text-danger {
+  color: red; /* Estilizando a cor do texto para vermelho */
 }
 </style>

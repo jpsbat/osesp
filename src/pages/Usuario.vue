@@ -20,7 +20,7 @@
                 <div class="md-layout-item md-small-size-100 md-size-33">
                   <md-field>
                     <label>Email</label>
-                    <md-input v-model="email" type="email"></md-input>
+                    <md-input v-model="login" type="email"></md-input>
                   </md-field>
                 </div>
                 <div class="md-layout-item md-small-size-100 md-size-50">
@@ -38,10 +38,7 @@
                 <div class="md-layout-item md-small-size-100 md-size-33">
                   <md-field>
                     <label>Permissão de acesso</label>
-                    <md-input
-                      v-model="idPermissaoAcesso"
-                      type="text"
-                    ></md-input>
+                    <md-input v-model="idPerfilUsuario" type="text"></md-input>
                   </md-field>
                 </div>
                 <div class="md-layout-item md-small-size-100 md-size-33">
@@ -83,10 +80,10 @@ export default {
   data() {
     return {
       nome: "",
-      email: "",
+      login: "",
       senha: "",
       ativo: null,
-      idPermissaoAcesso: null,
+      idPerfilUsuario: null,
       usuarios: [],
     };
   },
@@ -95,16 +92,16 @@ export default {
 
     const ativoNum = /^\d+$/.test(this.ativo) ? parseInt(this.ativo) : null;
 
-    const idPermissaoAcessoNum = /^\d+$/.test(this.idPermissaoAcesso)
-      ? parseInt(this.idPermissaoAcesso)
+    const idPerfilUsuarioNum = /^\d+$/.test(this.idPerfilUsuario)
+      ? parseInt(this.idPerfilUsuario)
       : null;
 
     axios
       .post("http://localhost:3000/routes/usuarios/cadastrar", {
         nome: this.nome,
-        email: this.email,
+        login: this.login,
         senha: this.senha,
-        idPermissaoAcesso: idPermissaoAcessoNum,
+        idPerfilUsuario: idPerfilUsuarioNum,
         ativo: ativoNum,
       })
       .then((response) => {
