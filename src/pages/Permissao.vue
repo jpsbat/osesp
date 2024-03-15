@@ -69,7 +69,7 @@ export default {
         : null;
 
       axios
-        .post("http://localhost:3000/routes/permissaoacesso/cadastrar", {
+        .post("http://localhost:3000/routes/perfilusuario/cadastrar", {
           descricao: this.descricao,
           administrador: administradorNum,
         })
