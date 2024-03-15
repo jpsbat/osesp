@@ -1,11 +1,25 @@
 <template>
   <div>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <md-table v-model="usuarios" :table-header-color="tableHeaderColor">
       <md-table-row slot="md-table-row" slot-scope="{ item }">
         <md-table-cell md-label="Cargo">{{ item.name }}</md-table-cell>
         <md-table-cell md-label="Administrador">{{
           item.country
         }}</md-table-cell>
+        <md-table-cell md-label="Alterar"
+          ><button class="btn" style="color: blue">
+            <i class="fa fa-pencil" style="margin-right: 8px"></i>Alterar
+          </button></md-table-cell
+        >
+        <md-table-cell md-label="Excluir"
+          ><button class="btn" style="color: red">
+            <i class="fa fa-trash" style="margin-right: 8px"></i>Excluir
+          </button></md-table-cell
+        >
       </md-table-row>
     </md-table>
   </div>
