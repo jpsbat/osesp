@@ -7,9 +7,6 @@
       <div class="col-8">
         <h2 class="text-center mb-5 title-login">Faça o login</h2>
 
-        <!-- Parágrafos para exibir mensagens de erro -->
-        <p v-if="error" class="text-danger">{{ error }}</p>
-
         <b-form>
           <b-form-group label="E-mail" label-for="email">
             <b-form-input
@@ -48,6 +45,8 @@
           >
             <i class="fas fa-sign-in-alt"></i> Entrar
           </b-button>
+
+          <p v-if="error" class="text-danger mt-4">{{ error }}</p>
         </b-form>
       </div>
     </b-col>
@@ -65,13 +64,13 @@ export default {
     return {
       login: "",
       senha: "",
-      error: "", // Adicionando variável para armazenar mensagens de erro
+      error: "",
     };
   },
   methods: {
     async submitForm() {
       if (!this.login || !this.senha) {
-        this.error = "Preencha os campos obrigatórios."; // Definindo mensagem de erro
+        this.error = "Preencha os campos obrigatórios.";
         return;
       }
       const loginData = {
@@ -85,7 +84,7 @@ export default {
           console.log(response.data);
         })
         .catch((error) => {
-          this.error = "Login ou senha incorretos"; // Definindo mensagem de erro
+          this.error = "Login ou senha incorretos";
           console.error("Erro ao fazer login", error);
         });
     },
@@ -122,6 +121,6 @@ export default {
 }
 
 .text-danger {
-  color: red; /* Estilizando a cor do texto para vermelho */
+  color: red;
 }
 </style>
